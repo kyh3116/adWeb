@@ -1,0 +1,80 @@
+mysql 설치 순서
+오라클 홈페이지 - 리소스 - 소프트웨어 다운로드 - mysql - mysql community (GPL) downloads
+두개 설치
+myqs community server (자동으로 os 인식) - zip archive 버전 위에꺼 191.4 메가
+connector/j - 선택중에 platform independent 선택하고 zip archive (아래꺼)
+
+받은 두 알집을 폴더로 - 여기에 압축풀기
+
+bin 안에 mysqld.exe 는 서버 mysql.exe는 클라이언트이다. 기본적으로 실행시키면 실행됨
+
+cmd 에서 실행시켜보면 단순 오류가 뜬다. 이건 초기화가 안되어있어서 그럼.
+or 
+dll 파일이 없다 나온다면?? 그건 -> https://support.microsoft.com/ko-kr/help/2977003/the-latest-supported-visual-c-downloads
+
+암튼 초기화를 하려면 
+mysqld --initialize-insecure --console
+하면 폴더에 data 디렉토리가 생긴다아. - 다시 초기화 하고싶으면 data 를 지우고 다시 초기화 하면댐.
+
+mysqld 를 종료할 때는 작업관리자에서 꺼라. 
+
+mysqld 를 쳐서 실행하는데 백그라운드에서 돌리려면 start mysqld 하면 새 창에서 열림. 창 하나로 하기.
+서버를 띄울때 케릭터 셋을 설정해서 띄울 수 있따.
+결국 -->> start mysqld -C utf8 이렇게 실행시키자.
+
+클라이언트 실행은
+mysql -u root -p
+비번 입력은 그냥 엔터 ㄱㄱ
+status; - 상태 확인
+끌때는 - quit
+
+결국 --> mysql --default-character-set=utf8 -u root -p
+
+이렇게 실행시키는데 서버 실행을 배치파일로 만들면...
+echo start mysqld -C utf8 > start-mysqld.bat
+
+클라이언트 실행을 배치파일로 만들면...
+echo mysql --default-character-set=utf8 -u root -p > start-mysql.bat
+
+배치파일까지 다 만들면 cmd bin 위치에서
+start-mysqld -> 서버 실행
+start-mysql -> 클라이언트가 서버에 접속해서 실행됨.
+status 해보면 utf-8 된걸 알수있음.
+
+
+
+교수님 코멘트
+다운로드 후, 압축을 푼 후에
+mysqld --initialize-insecure --console
+로 초기화.
+root로 패스워그 없이 로그인후에
+create user 'nodeuser'@'localhost' identified by 'nodetest';
+grant all on *.* to 'nodeuser'@'localhost';
+create user 'nodeuser'@'%' identified by 'nodetest';
+grant all on *.* to 'nodeuser'@'%';
+로 이용자 추가.
+
+alter user 'yong_web'@'localhost' identified with mysql_native_password by '984600ok';
+alter user 'yong_web'@'%' identified with mysql_native_password by '984600ok';
+로 해결.
+
+CREATE USER 'web2020'@'localhost' IDENTIFIED BY 'web2020' PASSWORD EXPIRE NEVER;
+CREATE DATABASE web CHARACTER SET utf8 COLLATE utf8_bin;
+GRANT ALL PRIVILEGES ON web.* TO 'web2019'@'localhost';
+CREATE USER 'web2020'@'%' IDENTIFIED BY 'web2020' PASSWORD EXPIRE NEVER;
+GRANT ALL PRIVILEGES ON web.* TO 'web2020'@'%';
+ALTER USER 'web2020'@'localhost' IDENTIFIED WITH mysql_native_password BY ' web2020';
+ 
+// mysql server initialize
+mysqld --initialize-insecure
+// start-mysqld.bat
+start mysqld -C utf8 
+//start-mysql.bat
+mysql --default-character-set=utf8 -u root -p
+
+
+
+
+
+
+

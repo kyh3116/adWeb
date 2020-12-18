@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Insert Page</title>
+	<style>
+		*{background-color: #000000;}
+		*{color: white; text-shadow: 1px 1px 1px #0B0B3B;}
+		a{text-decoration: none; color: white; display: block;}
+	</style>	
+</head>
+<body>
+	<h1>Insert Page</h1>
+	<hr/>
+	<form method="post">
+		<legend>INSERT DATA</legend>
+		<table>
+			<tr>
+				<td><labe>쇼핑몰 이름</labe></td>
+				<td><input type="text" name="mallname" /></td>
+			</tr>
+			<tr>
+				<td><Label>입점 링크</Label></td>
+				<td><input type="text" name="link" /></td>
+			</tr>
+			<tr>
+				<td><label>판매수수료</label></td>
+				<td><input type="text" name="sales_commission" /></td>
+			</tr>
+			<tr>
+				<td><labe>정기요금</labe></td>
+				<td><input type="text" placeholder="ex) 월 5만원" name="regular_fare" /></td>
+			</tr>
+			<tr>
+				<td><Label>입점 난이도</Label></td>
+				<td><input type="text" placeholder="ex) md 승인필요" name="difficulty_level_of_entry" /></td>
+			</tr>
+			<tr>
+				<td><label>입점 및 운영 팁</label></td>
+				<td><input type="text" name="entry_tip" /></td>
+			</tr>
+		</table>
+		<input type="submit" />
+	</form>
+</body>
+</html>
+
+<!-- id, mallname, link, sales_commission, regular_fare, difficulty_level_of_entry, entry_tip -->

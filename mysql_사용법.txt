@@ -1,0 +1,55 @@
+유저 생성
+로컬에서만 가능한 아이디 만들기.
+CREATE USER 'yong_web'@'localhost' IDENTIFIED BY '984600ok' PASSWORD EXPIRE NEVER;
+	         아이디      로컬로접속	          비번
+다른 서버에서도 접속 가능한 아이디 만들기
+CREATE USER 'yong_web'@'%' IDENTIFIED BY '984600ok' PASSWORD EXPIRE NEVER;
+둘다 해야 같은 컴터든 다른 컴터에서든 접속 가능
+
+
+데이터베이스 생성
+show databases; 해서 존재하는 데이터 베이스 확인 후
+CREATE DATABASE yong_database CHARACTER SET utf8 COLLATE utf8_bin;
+		이름자리
+
+만들어 놓은 유저가 데이터베이스에 접근할 수 있게 하려면
+GRANT ALL PRIVILEGES ON yong_database.* TO 'yong_web'@'localhost';
+GRANT ALL PRIVILEGES ON yong_database.* TO 'yong_web'@'%';
+
+그 다음 끄고 root 말고 yong_web 아이디로 배치파일 수정 후 접속이 가능함.
+show databases; 하면 아마 하나만 나올거고 
+use yong_database; 하면 데이터 베이스 접근 가능.
+
+
+
+만약 비밀번호가 제대로 입력이 안되는 경우가 발생하면
+ALTER USER 'yong_web'@'localhost' IDENTIFIED WITH mysql_native_password BY ' 984600ok';
+ALTER USER 'yong_web'@'%' IDENTIFIED WITH mysql_native_password BY ' 984600ok';
+
+교수님 코멘트
+다운로드 후, 압축을 푼 후에
+mysqld --initialize-insecure --console
+로 초기화.
+root로 패스워그 없이 로그인후에
+create user 'nodeuser'@'localhost' identified by 'nodetest';
+grant all on *.* to 'nodeuser'@'localhost';
+create user 'nodeuser'@'%' identified by 'nodetest';
+grant all on *.* to 'nodeuser'@'%';
+로 이용자 추가.
+패스워그 auth 에러시
+alter user 'nodeuser'@'localhost' identified with mysql_native_password by 'nodetest';
+로 해결.
+
+CREATE USER 'web2020'@'localhost' IDENTIFIED BY 'web2020' PASSWORD EXPIRE NEVER;
+CREATE DATABASE web CHARACTER SET utf8 COLLATE utf8_bin;
+GRANT ALL PRIVILEGES ON web.* TO 'web2019'@'localhost';
+CREATE USER 'web2020'@'%' IDENTIFIED BY 'web2020' PASSWORD EXPIRE NEVER;
+GRANT ALL PRIVILEGES ON web.* TO 'web2020'@'%';
+ALTER USER 'web2020'@'localhost' IDENTIFIED WITH mysql_native_password BY ' web2020';
+ 
+// mysql server initialize
+mysqld --initialize-insecure
+// start-mysqld.bat
+start mysqld -C utf8 
+//start-mysql.bat
+mysql --default-character-set=utf8 -u root -p

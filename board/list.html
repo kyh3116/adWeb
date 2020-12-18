@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{background-color: #000000;}
+		*{color: white; text-shadow: 1px 1px 1px #0B0B3B;}
+	</style>
+	<link rel="stylesheet" type="text/css" href="mainstyle.css">
+</head>
+<header>
+	<div class="mainStyle">
+		<h1><a href="/">Seller's TMI</h1>
+		<nav class="menu">
+			<ul>
+			<li><a href="/">HOME</a></li>
+			<li><a href="/board">ENTRY INFO</a>
+<!-- 				<ul>
+					<li><a href="marketing.html">운영중인 쇼핑몰</a></li>
+					<li><a href="marketing2.html">코스닥</a></li>
+					<li><a href="tool.html">마케팅 툴</a></li>
+				</ul> -->
+			</li>
+			<li><a href="/join_data">OPERATER's SHOP</a>
+<!-- 				<ul>
+					<li><a href="myhomepage.html">뉴스</a></li>
+					<li><a href="#">토론</a></li>
+				</ul> -->
+			</li>
+			<li><a href="/login">LOGIN</a></li>
+			<li><a href="/register">SIGN IN</a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+<body><br><br><br><br>
+<!-- 	<h1>List Page</h1> -->
+	<br><p><a href="/insert">INSERT DATA</a></p>
+	<hr/>
+
+	<table  border="1"> <!-- //width="100%" -->
+		<tr>
+			<th>ID</th>
+			<th>쇼핑몰</th>
+			<th>입점링크</th>
+			<th>판매수수료</th>
+			<th>정기요금</th>
+			<th>입점난이도</th>
+			<th>팁</th>
+			<th>EDIT</th>
+			<th>DELETE</th>
+		</tr>
+		<% data.forEach(function(item, index) { %>
+		<tr>
+			<td><%= item.id %> </td>
+			<td><%= item.mallname %> </td>
+			<td><%= item.link %> </td>
+			<td><%= item.sales_commission %> </td>
+			<td><%= item.regular_fare %> </td>
+			<td><%= item.difficulty_level_of_entry %> </td>
+			<td><%= item.entry_tip %> </td>
+			<td><a href="/edit/<%= item.id %>">EDIT</a></td>
+			<td><a href="/delete/<%= item.id %>">DELETE</a></td>
+		</tr>
+		<% }); %>
+	</table>
+</body>
+</html>
+
+<!-- id, mallname, link, sales_commission, regular_fare, difficulty_level_of_entry, entry_tip -->
